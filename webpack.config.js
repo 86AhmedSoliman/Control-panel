@@ -6,11 +6,12 @@ const CssMinimizerWebpackPlugin = require('css-minimizer-webpack-plugin');//Opti
 module.exports= {
     entry: {
         'app': './src/index.js',
+        'assets/js/banner': './src/Assets/js/banner.js'
     },
     output: {
         publicPath: '/',
         path: path.join(__dirname, "/app"),
-        filename: 'app.js',
+        filename: '[name].js',
     },
     devServer: {
         contentBase: path.join(__dirname, "/app"),
@@ -27,6 +28,16 @@ module.exports= {
                         loader: 'html-loader',
                     },
                 ],
+            },
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: "babel-loader",
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             },
             {
                 test: /\.(sass|css|scss)$/,
@@ -61,6 +72,27 @@ module.exports= {
         new HtmlWebPackPlugin({
             filename: 'index.html',
             template: './src/index.html',
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'Components/button.html',
+            template: './src/Components/button.html',
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'Components/textfield.html',
+            template: './src/Components/textfield.html',
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'Components/card.html',
+            template: './src/Components/card.html',
+            chunks: ['app']
+        }),
+        new HtmlWebPackPlugin({
+            filename: 'Components/banner.html',
+            template: './src/Components/banner.html',
+            chunks: ['app','assets/js/banner']
         }),
     ],
 }
