@@ -6,6 +6,7 @@
     display: flex;
 }
 .c-tabs__tab{
+    cursor: pointer;
     text-align: center;
     padding: spacing() spacing("small");
     flex-grow: 1;
